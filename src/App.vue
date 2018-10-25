@@ -15,13 +15,13 @@
       return {
         filterView: '', // 动态组件控制参数
         date: '',
-        datePickerParam: [
-          { type: 0, defaultDate: '2018-10-10' },
-          { type: 1, defaultDate: '', rangeDate: [2000, 2018] },
-          { type: 2, rangeDate: [1970, 2100] },
-          { type: 3, defaultDate: ['2001-05', '2001-09'] },
-          { type: 4 },
-          { type: 5, defaultDate: '2018-10-10', name: '日期' }
+        datePickerParam: [ // type 类型 defaultDate 首次加载默认选中值 rangeDate 日期选择范围
+          { type: 0, defaultDate: '2018-10-10' }, // 日期选择（不能选今天之后的日期）
+          { type: 1, defaultDate: '', rangeDate: [2000, 2018] }, // 月份选择（不能选这个月之后的月份）
+          { type: 2, rangeDate: [1970, 2100] }, // 选择年份
+          { type: 3, defaultDate: ['2001-05', '2001-09'] }, // 月区间选择（不能超过当前月份）
+          { type: 4 }, // 日区间选择（不能超过当前日期）
+          { type: 5, defaultDate: '2018-10-10', name: '日期' } // 日期选择
         ] // 日期组件参数
       }
     },
@@ -29,10 +29,7 @@
       showDatePicker () {
         this.filterView = DatePicker
       },
-      clearComponent () {
-        this.filterView = ''
-      },
-      setDatetime (val) { // 选择时间
+      setDatetime (val) { // 选择完成回调 关闭 返回false
         if (val) this.date = val
         this.filterView = ''
       }
